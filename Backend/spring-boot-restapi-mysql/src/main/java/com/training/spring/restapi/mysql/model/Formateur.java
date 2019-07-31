@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.*;
@@ -37,6 +39,12 @@ public class Formateur {
 	
     @OneToMany(targetEntity = Session.class, mappedBy = "formateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Session> sessions;
+    
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+	  @JoinColumn(name = "idAdresse", insertable = true, updatable = true)
+	  private Adresse adressC;
+	  //@Fetch(FetchMode.JOIN)
+    
 
 	public Formateur() {
 	}
@@ -47,6 +55,7 @@ public class Formateur {
 		this.lastname = lastname;
 		this.email = email;
 		this.adress= adress;
+		this.adressC=adressC;
 		this.tel = tel;
 	}
 
@@ -57,7 +66,16 @@ public class Formateur {
 		this.lastname = lastname;
 		this.email = email;
 		this.adress= adress;
+		this.adressC=adressC;
 		this.tel = tel;
+	}
+
+	public Adresse getAdressC() {
+		return adressC;
+	}
+
+	public void setAdressC(Adresse adressC) {
+		this.adressC = adressC;
 	}
 
 	public long getId() {
@@ -113,7 +131,7 @@ public class Formateur {
 
 	@Override
 	public String toString() {
-		return "Formateur [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email + ", adress=" +adress+", tel="+tel+"]";
+		return "Formateur [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email + ", adress=" +adress+", adressC=" +adressC+",tel="+tel+"]";
 	}
 
 	

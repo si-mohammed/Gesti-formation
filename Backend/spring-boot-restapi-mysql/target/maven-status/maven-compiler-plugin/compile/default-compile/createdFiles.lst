@@ -11,3 +11,4 @@ com/training/spring/restapi/mysql/repo/ParticipantRepository.class
 com/training/spring/restapi/mysql/controller/FormateurController.class
 com/training/spring/restapi/mysql/dto/ParticipantSessionDTO.class
 com/training/spring/restapi/mysql/model/Session.class
+com/training/spring/restapi/mysql/model/Adresse.class

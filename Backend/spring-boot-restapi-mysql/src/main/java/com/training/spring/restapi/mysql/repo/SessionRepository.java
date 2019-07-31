@@ -1,21 +1,23 @@
 package com.training.spring.restapi.mysql.repo;
 
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 //import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.training.spring.restapi.mysql.model.Session;
-import com.training.spring.restapi.mysql.model.Formateur;
+//import com.training.spring.restapi.mysql.model.Formateur;
 
 import com.training.spring.restapi.mysql.dto.FormateurSessionDTO;
 import com.training.spring.restapi.mysql.dto.ParticipantSessionDTO;
-public interface SessionRepository extends CrudRepository<Session, Integer> {
+public interface SessionRepository extends CrudRepository<Session, Long> {
 	List<Session> findByName(String name);
 
-	Optional<Session> findById(long id);
+	Session findById(long id);
+	@Query("SELECT s.id, s.name, s.track, s.date, s.duree, s.adress, s.participants, s.isCompleted " + " FROM Session s")
+	List<Session> fetchAllSessions();
 
 	void deleteById(long id);
 
@@ -23,8 +25,7 @@ public interface SessionRepository extends CrudRepository<Session, Integer> {
 	/*@Query ("select count(s) from session s WHERE u.track = ?1")
 	int findByTrack();*/
 		
-	@Query("SELECT s.id, s.name, s.track, s.date, s.duree, s.adress, s.participants, s.isCompleted " + " FROM Session s")
-			List<Session> fetchAllSessions();
+	
 		
 	
 	@Query("SELECT new com.training.spring.restapi.mysql.dto.ParticipantSessionDTO ( s.id, s.name, s.track, s.date, s.duree, s.adress, s.participants, s.isCompleted, p.id, p.name, p.lastname) "

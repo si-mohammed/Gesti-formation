@@ -11,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+//import org.hibernate.annotations.Fetch;
+//import org.hibernate.annotations.FetchMode;
 
 import java.util.*;
 
@@ -65,6 +65,19 @@ public class Session {
 	}
 
 	public Session(long id, String name, String track, Date date, int duree, String adress, int participants, boolean isCompleted)
+	 {
+		this.id = id;
+		this.name = name;
+		this.track = track;
+		this.date = date;
+		this.duree= duree;
+		this.adress= adress;
+		this.participants = participants;
+		this.isCompleted = false;
+		
+
+	}	
+	public Session(String name, String track, Date date, int duree, String adress, int participants, boolean isCompleted)
 	 {
 		this.name = name;
 		this.track = track;

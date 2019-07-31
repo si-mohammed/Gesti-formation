@@ -2,7 +2,7 @@ package com.training.spring.restapi.mysql.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,8 +26,8 @@ import com.training.spring.restapi.mysql.model.Session;
 import com.training.spring.restapi.mysql.repo.FormateurRepository;
 import com.training.spring.restapi.mysql.repo.ParticipantRepository;
 import com.training.spring.restapi.mysql.repo.SessionRepository;
-import java.util.*;
-import java.text.*;
+//import java.util.*;
+//import java.text.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
@@ -46,7 +46,7 @@ public class SessionController {
 	@Autowired
 	ParticipantRepository repositoryparticipant;
 
-	@GetMapping("/sessions")
+	@GetMapping("/sessions/list")
 	public ResponseEntity<List<Session>> getAllSessions() {
 		List<Session> sessions = new ArrayList<>();
 		try {
@@ -65,7 +65,7 @@ public class SessionController {
 	}
 
 
-	@GetMapping("/sessionsf")
+	@GetMapping("/sessionsf/list")
 	public ResponseEntity<List<FormateurSessionDTO>> getAllSessionsf() {
 		//List<FormateurSessionDTO> sessions = new ArrayList<>();
 		try {
@@ -80,7 +80,20 @@ public class SessionController {
 		}
 	}
 	
-	@GetMapping("/sessionsp")
+	@PostMapping("/sessionf/add") 
+	 public ResponseEntity<Session> postSessionf(@RequestBody Session session) { 
+		 try { 
+			 //Session _session = repository.save(new Session(session.getName(), session.getTrack(), null, 0, null, 0, false));
+			 //Participant p = repositoryparticipant.findById(id);
+			 //session.setParticipant(p); 
+			 Session _session = repository.save(session);
+			 return new ResponseEntity<>(_session, HttpStatus.CREATED); 
+			 } catch (Exception e) { 
+				 return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED); 
+				 } 
+		 }
+	
+	@GetMapping("/sessionsp/list")
 	public ResponseEntity<List<ParticipantSessionDTO>> getAllSessionsp() {
 		//List<FormateurSessionDTO> sessions = new ArrayList<>();
 		try {
@@ -120,13 +133,17 @@ public class SessionController {
 
 	@GetMapping("/onesession/{id}")
 	public ResponseEntity<Session> getSessionById(@PathVariable("id") long id) {
-		Optional<Session> SessionData = repository.findById(id);
+		Session sessionData = repository.findById(id);
 
-		if (SessionData.isPresent()) {
-			return new ResponseEntity<>(SessionData.get(), HttpStatus.OK);
+		if (repository.existsById(id)) {
+			return new ResponseEntity<>(new Session (sessionData.getId(), sessionData.getName(), sessionData.getTrack(), sessionData.getDate(), sessionData.getDuree(), sessionData.getAdress(), sessionData.getParticipants(), sessionData.getIsCompleted()), HttpStatus.OK);
+			
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+		
+		
+		
 	}
 
 	@GetMapping("/nombresessions/")
@@ -166,7 +183,7 @@ public class SessionController {
 				 return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED); 
 				 } 
 		 }
-	 @PostMapping("/session") 
+	 @PostMapping("/session/add") 
 	 public ResponseEntity<Session> postSessionp(@RequestBody Session session) { 
 		 try { 
 			 //Session _session = repository.save(new Session(session.getName(), session.getTrack(), null, 0, null, 0, false));
@@ -179,7 +196,7 @@ public class SessionController {
 				 } 
 		 }
 
-	@DeleteMapping("/sessions/{id}")
+	@DeleteMapping("/session/delete/{id}")
 	public ResponseEntity<HttpStatus> deleteSession(@PathVariable("id") long id) {
 		try {
 			repository.deleteById(id);
@@ -214,12 +231,12 @@ public class SessionController {
 		}
 	}
 
-	@PutMapping("/update/{id}")
+	@PutMapping("/session/update/{id}")
 	public ResponseEntity<Session> updateSession(@PathVariable("id") long id, @RequestBody Session session) {
-		Optional<Session> sessionData = repository.findById(id);
+		Session sessionData = repository.findById(id);
 
-		if (sessionData.isPresent()) {
-			Session _session = sessionData.get();
+		if (repository.existsById(id)) {
+			Session _session = sessionData;
 			_session.setName(session.getName());
 			_session.setTrack(session.getTrack());
 			_session.setDate(session.getDate());
