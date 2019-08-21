@@ -1,13 +1,10 @@
 package com.training.spring.restapi.mysql.model;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.Proxy;
-
-//import com.fasterxml.jackson.annotation.JsonBackReference;
+//import com.fasterxml.jackson.annotation.JsonBackReference ;
 
 
 /**
@@ -16,33 +13,35 @@ import org.hibernate.annotations.Proxy;
  */
 @Entity
 @Table(name = "adresse")
-@Proxy(lazy=false)
-@NamedQuery(name="Adresse.findAll", query="SELECT a FROM Adresse a")
-public class Adresse implements Serializable {
-	private static final long serialVersionUID = 1L;
 
+public class AdresseComplete {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer idAdresse;
+	private long id;
 
 	@Column(name="complement_adresse_1")
 	private String complementAdresse1;
 
 	@Column(name="complement_adresse_2")
 	private String complementAdresse2;
-
+	
+	@Column(name="cp")
 	private String cp;
 
 	@Column(name="nom_voie")
 	private String nomVoie;
-
+	
+	@Column(name="num")
 	private String num;
-
+	
+	@Column(name="pays")
 	private String pays;
-
+	
 	@Column(name="type_voie")
 	private String typeVoie;
-
+	
+	@Column(name="ville")
 	private String ville;
 	
 	/*
@@ -57,19 +56,106 @@ public class Adresse implements Serializable {
 	 * utilisateur;
 	 */
 
-	 @OneToMany(targetEntity = Formateur.class, mappedBy = "adressC", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	 @OneToMany(targetEntity = Formateur.class, mappedBy = "adresseComplete", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 		private Set<Formateur> formateurs;
+	 
+	 public AdresseComplete() {
+		}
+	 
+	 public AdresseComplete(long _id, String _complementAdresse1, String _complementAdresse2, String _cp, String _nomVoie, String _num, String _pays, String _typeVoie, String _ville )
+	 {
+	    this.id = _id;
+		this.complementAdresse1 = _complementAdresse1;
+		this.complementAdresse2 = _complementAdresse2;
+		this.cp = _cp;
+		this.nomVoie= _nomVoie;
+		this.num=_num;
+		this.pays = _pays;
+		this.typeVoie=_typeVoie;
+		this.ville=_ville;
+	}
 	
-	
-	public Adresse() {
+	 public AdresseComplete(String _complementAdresse1, String _complementAdresse2, String _cp, String _nomVoie, String _num, String _pays, String _typeVoie, String _ville )
+	 {
+		this.complementAdresse1 = _complementAdresse1;
+		this.complementAdresse2 = _complementAdresse2;
+		this.cp = _cp;
+		this.nomVoie= _nomVoie;
+		this.num=_num;
+		this.pays = _pays;
+		this.typeVoie=_typeVoie;
+		this.ville=_ville;
+	}
+	 public AdresseComplete(long _id, String _pays )
+	 {
+		 this.id = _id;
+		 //this.complementAdresse1 = _complementAdresse1;
+		//this.complementAdresse2 = _complementAdresse2;
+		//this.cp = _cp;
+		//this.nomVoie= _nomVoie;
+		//this.num=_num;
+		this.pays = _pays;
+		//this.typeVoie=_typeVoie;
+		//this.ville=_ville;
+	}
+	 
+	 
+	 public AdresseComplete(long _id, String _pays, String _ville )
+	 {
+		 this.id = _id;
+		 //this.complementAdresse1 = _complementAdresse1;
+		//this.complementAdresse2 = _complementAdresse2;
+		//this.cp = _cp;
+		//this.nomVoie= _nomVoie;
+		//this.num=_num;
+		this.pays = _pays;
+		//this.typeVoie=_typeVoie;
+		this.ville=_ville;
+	}
+	 
+	 public AdresseComplete(long _id, String _pays, String _typeVoie, String _ville )
+	 {
+		 this.id = _id;
+		 //this.complementAdresse1 = _complementAdresse1;
+		//this.complementAdresse2 = _complementAdresse2;
+		//this.cp = _cp;
+		//this.nomVoie= _nomVoie;
+		//this.num=_num;
+		this.pays = _pays;
+		this.typeVoie=_typeVoie;
+		this.ville=_ville;
+	}
+	 public AdresseComplete(long _id, String _nomVoie, String _pays, String _typeVoie, String _ville )
+	 {
+		 this.id = _id;
+		 //this.complementAdresse1 = _complementAdresse1;
+		//this.complementAdresse2 = _complementAdresse2;String _pays,
+		//this.cp = _cp;
+		this.nomVoie= _nomVoie;
+		//this.num=_num;
+		this.pays = _pays;
+		this.typeVoie=_typeVoie;
+		this.ville=_ville;
+	}
+	 public AdresseComplete(long _id,  String _nomVoie, String _num, String _pays, String _typeVoie, String _ville )
+	 {
+		 this.id = _id;
+		 //this.complementAdresse1 = _complementAdresse1;
+		//this.complementAdresse2 = _complementAdresse2;
+		//this.cp = _cp;
+		this.nomVoie= _nomVoie;
+		this.num=_num;
+		this.pays = _pays;
+		this.typeVoie=_typeVoie;
+		this.ville=_ville;
+	} 
+
+	public long getId() {
+		return this.id;
 	}
 
-	public Integer getIdAdresse() {
-		return this.idAdresse;
-	}
-
-	public void setIdAdresse(Integer idAdresse) {
-		this.idAdresse = idAdresse;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getComplementAdresse1() {
@@ -152,4 +238,10 @@ public class Adresse implements Serializable {
 	 * public void setUtilisateur(Utilisateur utilisateur) { this.utilisateur =
 	 * utilisateur; }
 	 */
+    
+    @Override
+	public String toString() {
+		return "AdresseComplete [id=" + id + ", complementAdresse1=" + complementAdresse1 + ", complementAdresse2=" + complementAdresse2 + ", cp=" + cp + ", nomVoie=" +nomVoie+", num=" +num+",pays="+pays+",typeVoie="+typeVoie+",ville="+ville+"]";
+	}
+    
 }

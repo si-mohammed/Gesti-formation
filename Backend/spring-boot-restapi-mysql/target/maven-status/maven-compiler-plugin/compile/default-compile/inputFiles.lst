@@ -1,3 +1,4 @@
+/home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/dto/AdresseCompleteFormateurDTO.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/dto/FormateurSessionDTO.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/controller/ParticipantController.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/model/Formateur.java
@@ -5,10 +6,12 @@
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/model/Participant.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/controller/FormateurController.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/SpringBootRestApiMySqlApplication.java
-/home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/model/Adresse.java
+/home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/controller/AdresseCompleteController.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/repo/FormateurParticipantRepository.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/repo/SessionRepository.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/dto/FormateurParticipantSessionDTO.java
+/home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/repo/AdresseCompleteRepository.java
+/home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/model/AdresseComplete.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/dto/ParticipantSessionDTO.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/repo/ParticipantRepository.java
 /home/nabili/git/Gesti-formation/Backend/spring-boot-restapi-mysql/src/main/java/com/training/spring/restapi/mysql/model/Session.java

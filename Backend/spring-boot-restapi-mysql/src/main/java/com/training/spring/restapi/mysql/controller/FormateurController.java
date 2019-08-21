@@ -17,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.training.spring.restapi.mysql.dto.AdresseCompleteFormateurDTO;
+import com.training.spring.restapi.mysql.dto.FormateurSessionDTO;
+import com.training.spring.restapi.mysql.model.AdresseComplete;
 import com.training.spring.restapi.mysql.model.Formateur;
+import com.training.spring.restapi.mysql.model.Session;
+import com.training.spring.restapi.mysql.repo.AdresseCompleteRepository;
 import com.training.spring.restapi.mysql.repo.FormateurRepository;
 //import java.util.*;
 //import java.text.*;
@@ -33,9 +38,10 @@ public class FormateurController {
 	@Autowired
 	FormateurRepository repository;
 
+	@Autowired
+	AdresseCompleteRepository repositoryAdresseComplete;
 
-
-	@GetMapping("/formateurs")
+	@GetMapping("/formateurs/list")
 	public ResponseEntity<List<Formateur>> getAllFormateurs() {
 		List<Formateur> formateurs = new ArrayList<>();
 		try {
@@ -97,5 +103,34 @@ public class FormateurController {
 		}
 	}
 	
+@PostMapping("/formateurac/{adresseComplete_id}") // post un formateur avec une adresse: fournir l'id de l'adresse.
+	
+	public ResponseEntity<Formateur> postFormateurac(@PathVariable("adresseComplete_id") long id, @RequestBody Formateur formateur) {
+		try {
+			//Session _session = repository.save(new Session(session.getName(), session.getTrack(), null, 0, null, 0, false));
+			AdresseComplete a = repositoryAdresseComplete.findById(id);
+			formateur.setAdresseComplete(a);
+			Formateur _formateur = repository.save(formateur);
+			return new ResponseEntity<>(_formateur, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+@GetMapping("/formateursac/list") // get la liste de toutes les formateurs avec une adresse
+
+public ResponseEntity<List<AdresseCompleteFormateurDTO>> getAllFormateursac() {
+	//List<FormateurSessionDTO> sessions = new ArrayList<>();
+	try {
+	//	repository.fetchFormateurBySession().forEach(sessions::add);
+	List<AdresseCompleteFormateurDTO> formateurs=repository.fetchAdresseCompleteByFormateur();
+		if (formateurs.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(formateurs, HttpStatus.OK);
+	} catch (Exception e) {
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+}
+
 
 }

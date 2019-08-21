@@ -40,9 +40,10 @@ public class Formateur {
     @OneToMany(targetEntity = Session.class, mappedBy = "formateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Session> sessions;
     
+        
     @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
-	  @JoinColumn(name = "idAdresse", insertable = true, updatable = true)
-	  private Adresse adressC;
+	  @JoinColumn(name = "adresseComplete_id", insertable = true, updatable = true)
+	  private AdresseComplete adresseComplete;
 	  //@Fetch(FetchMode.JOIN)
     
 
@@ -55,8 +56,9 @@ public class Formateur {
 		this.lastname = lastname;
 		this.email = email;
 		this.adress= adress;
-		this.adressC=adressC;
 		this.tel = tel;
+		this.adresseComplete=adresseComplete;
+		
 	}
 
 	public Formateur(long id, String name, String lastname, String email, String adress, long tel)
@@ -66,16 +68,39 @@ public class Formateur {
 		this.lastname = lastname;
 		this.email = email;
 		this.adress= adress;
-		this.adressC=adressC;
 		this.tel = tel;
+		this.adresseComplete=adresseComplete;
+		
+	}
+	public Formateur(long id, String name, String lastname, String email, String adress, long tel, AdresseComplete adresseComplete)
+	 {
+	    this.id = id;
+		this.name = name;
+		this.lastname = lastname;
+		this.email = email;
+		this.adress= adress;
+		this.tel = tel;
+		this.adresseComplete=adresseComplete;
+		
+	}
+	public Formateur(String name, String lastname, String email, String adress, long tel, AdresseComplete adresseComplete)
+	 {
+	    this.name = name;
+		this.lastname = lastname;
+		this.email = email;
+		this.adress= adress;
+		this.tel = tel;
+		this.adresseComplete=adresseComplete;
+		
+	}
+	
+	
+	public AdresseComplete getAdresseComplete() {
+		return adresseComplete;
 	}
 
-	public Adresse getAdressC() {
-		return adressC;
-	}
-
-	public void setAdressC(Adresse adressC) {
-		this.adressC = adressC;
+	public void setAdresseComplete(AdresseComplete adresseComplete) {
+		this.adresseComplete = adresseComplete;
 	}
 
 	public long getId() {
@@ -131,7 +156,7 @@ public class Formateur {
 
 	@Override
 	public String toString() {
-		return "Formateur [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email + ", adress=" +adress+", adressC=" +adressC+",tel="+tel+"]";
+		return "Formateur [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email + ", adress=" +adress+", tel="+tel+", adresseComplete=" +adresseComplete+"]";
 	}
 
 	

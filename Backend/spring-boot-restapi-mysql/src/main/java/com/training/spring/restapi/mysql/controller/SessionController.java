@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.training.spring.restapi.mysql.dto.FormateurParticipantSessionDTO;
 import com.training.spring.restapi.mysql.dto.FormateurSessionDTO;
 import com.training.spring.restapi.mysql.dto.ParticipantSessionDTO;
 import com.training.spring.restapi.mysql.model.Formateur;
@@ -26,6 +25,9 @@ import com.training.spring.restapi.mysql.model.Session;
 import com.training.spring.restapi.mysql.repo.FormateurRepository;
 import com.training.spring.restapi.mysql.repo.ParticipantRepository;
 import com.training.spring.restapi.mysql.repo.SessionRepository;
+
+//import com.training.spring.restapi.mysql.dto.FormateurParticipantSessionDTO;
+
 //import java.util.*;
 //import java.text.*;
 @CrossOrigin(origins = "http://localhost:4200")
@@ -46,7 +48,8 @@ public class SessionController {
 	@Autowired
 	ParticipantRepository repositoryparticipant;
 
-	@GetMapping("/sessions/list")
+	@GetMapping("/sessions/list") // get la liste de toutes les sessions
+	
 	public ResponseEntity<List<Session>> getAllSessions() {
 		List<Session> sessions = new ArrayList<>();
 		try {
@@ -65,7 +68,8 @@ public class SessionController {
 	}
 
 
-	@GetMapping("/sessionsf/list")
+	@GetMapping("/sessionsf/list") // get la liste de toutes les sessions avec formateur
+	
 	public ResponseEntity<List<FormateurSessionDTO>> getAllSessionsf() {
 		//List<FormateurSessionDTO> sessions = new ArrayList<>();
 		try {
@@ -80,8 +84,9 @@ public class SessionController {
 		}
 	}
 	
-	@PostMapping("/sessionf/add") 
-	 public ResponseEntity<Session> postSessionf(@RequestBody Session session) { 
+	@PostMapping("/sessionf/add") // post une session avec formateur, accepte également une session sans formateur
+	 
+	public ResponseEntity<Session> postSessionf(@RequestBody Session session) { 
 		 try { 
 			 //Session _session = repository.save(new Session(session.getName(), session.getTrack(), null, 0, null, 0, false));
 			 //Participant p = repositoryparticipant.findById(id);
@@ -93,7 +98,8 @@ public class SessionController {
 				 } 
 		 }
 	
-	@GetMapping("/sessionsp/list")
+	@GetMapping("/sessionsp/list") // get la liste de toutes les session avec participant
+	
 	public ResponseEntity<List<ParticipantSessionDTO>> getAllSessionsp() {
 		//List<FormateurSessionDTO> sessions = new ArrayList<>();
 		try {
@@ -122,16 +128,18 @@ public class SessionController {
 	 */
 	 
 	
-	@RequestMapping("/save")
-    public String process(){
-       // repository.save(new Session("Web", "NodeJS", null, 10, "Lille", 5, false ));
-        //repository.save(new Session("Web", "NodeJS", null, 10, "Lille", 5, false ));
-        return "Done";
-    }
+	/*
+	 * @RequestMapping("/save") public String process(){ 
+	 * repository.save(new
+	 * Session("Web", "NodeJS", null, 10, "Lille", 5, false ));
+	 * repository.save(new Session("Web", "NodeJS", null, 10, "Lille", 5, false
+	 * )); return "Done"; }
+	 */
 
 
 
-	@GetMapping("/onesession/{id}")
+	@GetMapping("/onesession/{id}") // get une session avec un id
+	
 	public ResponseEntity<Session> getSessionById(@PathVariable("id") long id) {
 		Session sessionData = repository.findById(id);
 
@@ -146,7 +154,8 @@ public class SessionController {
 		
 	}
 
-	@GetMapping("/nombresessions/")
+	@GetMapping("/nombresessions/") //get le nombre de session
+	
 	public ResponseEntity<Long> getNombreSessions() {
 		try {
 			if (repository.count()==0) {
@@ -158,7 +167,8 @@ public class SessionController {
 		}
 	}
 
-	@PostMapping("/sessionf/{formateur_id}")
+	@PostMapping("/sessionf/{formateur_id}") // post une session avec un formateur: fournir l'id du formateur.
+	
 	public ResponseEntity<Session> postSessionf(@PathVariable("formateur_id") long id, @RequestBody Session session) {
 		try {
 			//Session _session = repository.save(new Session(session.getName(), session.getTrack(), null, 0, null, 0, false));
@@ -171,7 +181,8 @@ public class SessionController {
 		}
 	}
 	
-	 @PostMapping("/sessionp/{participant_id}") 
+	 @PostMapping("/sessionp/{participant_id}") // post une session avec un formateur: fournir l'id du participant.
+	 
 	 public ResponseEntity<Session> postSessionp(@PathVariable("participant_id") long id, @RequestBody Session session) { 
 		 try { 
 			 //Session _session = repository.save(new Session(session.getName(), session.getTrack(), null, 0, null, 0, false));
@@ -183,7 +194,8 @@ public class SessionController {
 				 return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED); 
 				 } 
 		 }
-	 @PostMapping("/session/add") 
+	 @PostMapping("/session/add") //post une session sans formateur possible redondance avec sessionf/add
+	 
 	 public ResponseEntity<Session> postSessionp(@RequestBody Session session) { 
 		 try { 
 			 //Session _session = repository.save(new Session(session.getName(), session.getTrack(), null, 0, null, 0, false));
@@ -196,7 +208,8 @@ public class SessionController {
 				 } 
 		 }
 
-	@DeleteMapping("/session/delete/{id}")
+	@DeleteMapping("/session/delete/{id}") // Supprime une session fournir l'id de la session
+	
 	public ResponseEntity<HttpStatus> deleteSession(@PathVariable("id") long id) {
 		try {
 			repository.deleteById(id);
@@ -206,7 +219,8 @@ public class SessionController {
 		}
 	}
 
-	@DeleteMapping("/sessions")
+	@DeleteMapping("/sessions") //Supprime toutes les sessions
+	
 	public ResponseEntity<HttpStatus> deleteAllSession() {
 		try {
 			repository.deleteAll();
@@ -217,7 +231,8 @@ public class SessionController {
 
 	}
 
-	@GetMapping(value = "nombreTracks/{track}")
+	@GetMapping(value = "nombreTracks/{track}") // donne le nombre qu'un {Track} est enregistré 
+	
 	public ResponseEntity<Integer> countByTrack(@PathVariable String track) {
 		try {
 			List<Session> sessions = repository.findByTrack(track);
@@ -231,7 +246,8 @@ public class SessionController {
 		}
 	}
 
-	@PutMapping("/session/update/{id}")
+	@PutMapping("/session/update/{id}") // update une session fournir id de la session
+	
 	public ResponseEntity<Session> updateSession(@PathVariable("id") long id, @RequestBody Session session) {
 		Session sessionData = repository.findById(id);
 
