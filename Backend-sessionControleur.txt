@@ -1,0 +1,32 @@
+Controleur Session 
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+
+@RequestMapping("/api") //raine du mapping
+
+@GetMapping("/sessions/list") // get la liste de toutes les sessions
+
+@GetMapping("/sessionsf/list") // get la liste de toutes les sessions avec formateur
+
+@PostMapping("/sessionf/add") // post une session avec formateur, accepte également une session sans formateur
+
+@GetMapping("/sessionsp/list") // get la liste de toutes les session avec participant
+
+@GetMapping("/onesession/{id}") // get une session avec un id
+
+@GetMapping("/nombresessions/") //get le nombre de session
+
+@PostMapping("/sessionf/{formateur_id}") // post une session avec un formateur: fournir l'id du formateur.
+
+@PostMapping("/sessionp/{participant_id}") // post une session avec un formateur: fournir l'id du participant.
+
+@PostMapping("/session/add") //post une session sans formateur possible redondance avec sessionf/add
+
+@DeleteMapping("/session/delete/{id}") // Supprime une session fournir l'id de la session
+
+@DeleteMapping("/sessions") //Supprime toutes les sessions
+
+@GetMapping(value = "nombreTracks/{track}") // donne le nombre qu'un {Track} est enregistré 
+
+@PutMapping("/session/update/{id}") // update une session fournir id de la session
+ 
