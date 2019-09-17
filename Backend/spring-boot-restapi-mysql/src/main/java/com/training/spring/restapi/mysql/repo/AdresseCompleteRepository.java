@@ -23,9 +23,21 @@ public interface AdresseCompleteRepository extends CrudRepository<AdresseComplet
 	  + " FROM AdresseComplete a") 
 	  List<AdresseComplete> fetchAllAdresseComplete();
 
+	  @Query("SELECT a FROM AdresseComplete a " + "WHERE a.pays = :pays  AND  a.ville = :ville")
+	  List<AdresseComplete> findByPaysAndVilleAndTypeVoies(String pays, String ville);
 
 	  @Query("SELECT a FROM AdresseComplete a " + "WHERE a.pays = :pays  AND  a.typeVoie = :typeVoie  AND  a.ville = :ville")
 	  List<AdresseComplete> findByPaysAndVilleAndTypeVoie(String pays, String typeVoie, String ville);
 	  //System.out.println("typeVoie =" + typeVoie);
+	  
+	  @Query("SELECT a FROM AdresseComplete a " + "WHERE a.pays = :pays ")
+	  List<AdresseComplete> findByPaysAndVilles(String pays);
+	  
+	  
+	  @Query("SELECT a FROM AdresseComplete a " + "WHERE a.nomVoie  = :nomVoie  AND  a.pays = :pays  AND  a.typeVoie = :typeVoie  AND  a.ville = :ville")
+	  List<AdresseComplete> findByPaysAndVilleAndTypeVoieAndNomVoie(String nomVoie, String pays, String typeVoie, String ville);
+	 
+	  @Query("SELECT a FROM AdresseComplete a " + "WHERE  a.pays = :pays  AND  a.typeVoie = :typeVoie  AND  a.ville = :ville")
+	  List<AdresseComplete> findByPaysAndVilleAndTypeVoieAndNomVoies(String pays, String typeVoie, String ville);
 	 
 }

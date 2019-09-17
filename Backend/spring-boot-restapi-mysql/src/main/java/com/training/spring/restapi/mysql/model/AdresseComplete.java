@@ -99,6 +99,19 @@ public class AdresseComplete {
 		//this.ville=_ville;
 	}
 	 
+	 public AdresseComplete( String _pays )
+	 {
+		 //this.id = _id;
+		 //this.complementAdresse1 = _complementAdresse1;
+		//this.complementAdresse2 = _complementAdresse2;
+		//this.cp = _cp;
+		//this.nomVoie= _nomVoie;
+		//this.num=_num;
+		this.pays = _pays;
+		//this.typeVoie=_typeVoie;
+		//this.ville=_ville;
+	}
+	 
 	 
 	 public AdresseComplete(long _id, String _pays, String _ville )
 	 {
